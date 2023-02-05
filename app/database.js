@@ -7,7 +7,7 @@ const pool = new Pool({
     connectionString,
     ssl: {
       rejectUnauthorized: true, 
-      //ca: config.database.ca
+      ca: config.database.ca
   },
   })
 
