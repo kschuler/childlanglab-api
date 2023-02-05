@@ -1,7 +1,7 @@
 version: '3.8'
 services: 
     api:
-      image: pcibex-to-postgres
+      container_name: pcibex-to-postgres
       build: .
       env_file: .env 
       ports: 
