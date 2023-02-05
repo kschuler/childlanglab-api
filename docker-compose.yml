@@ -1,0 +1,19 @@
+version: '3.8'
+services: 
+    api:
+      image: pcibex-to-postgres
+      build: .
+      env_file: .env 
+      networks:
+        - exbuilder
+      ports: 
+        - 3000:3000
+      environment: 
+        - $CONNECTION_STRING
+        - $POSTGRES_TABLE
+        - $COLNAME_ID 
+        - $COLNAME_DATA
+        - $TRUSTED_ORIGIN
+        - $REQUIRED_URLVARS
+networks:
+  exbuilder:
