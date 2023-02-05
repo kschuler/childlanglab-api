@@ -12,7 +12,7 @@ config.express = {
 
 config.database = { 
   connectionstring: process.env.CONNECTION_STRING,
-  ca: fs.readFileSync('../ca-certificate.crt').toString(),
+  //ca: fs.readFileSync('../ca-certificate.crt').toString(),
   table: process.env.POSTGRES_TABLE,
   id_colname: process.env.COLNAME_ID,
   data_colname: process.env.COLNAME_DATA,

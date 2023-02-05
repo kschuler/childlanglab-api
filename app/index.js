@@ -1,6 +1,7 @@
 'use strict'
 
 const express = require('express')
+const cors = require('cors')
 const config = require('./config')
 
 // Create a new instance of express
@@ -8,6 +9,10 @@ const app = express()
 
 // PCIbex sends request as text/html; tell express to expect this
 app.use(express.json({type: 'text/html'}));
+
+app.use(cors({
+  origin: config.validation.origin
+}));
 
 app.get('/', (req, res) => {
   res.send({
