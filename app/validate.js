@@ -20,7 +20,7 @@ function requestValidationRules () {
             .withMessage("Request is missing PCIbex column headers"),
         body("[3]") // make sure the third element is an array 
             .isArray()
-            .notEmpty()
+            // .notEmpty() // skip this since first request was empty
             .withMessage("Request is missing PCIbex row data"),
         body("[4]") // make sure the fourth element is a string (should be a hash, but isHash('md5') not working)
             .isString()
