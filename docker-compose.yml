@@ -12,7 +12,6 @@ services:
         - $COLNAME_ID 
         - $COLNAME_DATA
         - $TRUSTED_ORIGIN
-        - $REQUIRED_URLVARS
 networks:
   default:
     external:
