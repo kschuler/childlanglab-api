@@ -18,8 +18,8 @@ config.database = {
 }
 
 config.validation = {
-  origin: JSON.parse(process.env.TRUSTED_ORIGIN),
-  urlvars: JSON.parse(process.env.REQUIRED_URLVARS),
+  origin: process.env.TRUSTED_ORIGIN,
+  urlvars: ["participant","project","experiment","condition","researcher","sourcedb","location"]
 }
 if (PRODUCTION) {
   // for example

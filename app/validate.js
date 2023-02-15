@@ -5,7 +5,7 @@ function requestValidationRules () {
 
     return [
         header('origin') // check that request is originating from a trusted origin
-            .isIn(config.validation.origin)
+            .contains(config.validation.origin)
             .withMessage("Request must come from a trusted origin."),
         query(config.validation.urlvars)  // check that the query string contains required URL variables 
             .exists()
