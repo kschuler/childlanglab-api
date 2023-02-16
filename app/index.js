@@ -20,7 +20,7 @@ app.get('/', (req, res) => {
 })
 })
 
-// use our two routes: create-run and update-run, in the router.js 
+// use our route: /v1/runs/pcibex n the router.js 
 app.use('/', require('./router.js'))
 
 app.use(function(req,res){

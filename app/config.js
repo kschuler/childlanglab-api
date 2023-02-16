@@ -11,7 +11,7 @@ config.express = {
 
 config.database = { 
   connectionstring: process.env.CONNECTION_STRING,
-  ca: process.env.CA_CERT,
+  // ca: process.env.CA_CERT,
   table: process.env.POSTGRES_TABLE,
   id_colname: process.env.COLNAME_ID,
   data_colname: process.env.COLNAME_DATA,
@@ -19,7 +19,7 @@ config.database = {
 
 config.validation = {
   origin: process.env.TRUSTED_ORIGIN,
-  urlvars: ["participant","project","experiment","condition","researcher","sourcedb","location"]
+  urlvars: [config.database.id_colname, "participant","project","experiment","condition","researcher","sourcedb","location"]
 }
 if (PRODUCTION) {
   // for example

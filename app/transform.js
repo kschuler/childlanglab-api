@@ -26,7 +26,7 @@ function transformData(pcibex_array = [], urlvars = {}) {
     // return the transformed data as an object
     return {
         ...urlvars,
-        [config.database.id_colname] : uniqueid,
+        //[config.database.id_colname] : uniqueid,
         [config.database.data_colname] : data
     }
 }

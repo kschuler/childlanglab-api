@@ -52,7 +52,7 @@ function upsertData (req, res) {
 // }
 
 // our two routes, guarded by our validate.js middleware 
-router.post('/pcibex-data',  requestValidationRules(), validateRequest, upsertData)
+router.post('/v1/runs/pcibex',  requestValidationRules(), validateRequest, upsertData)
 // router.post('/update-run', requestValidationRules(), validateRequest, updateRun)
 
 module.exports = router
