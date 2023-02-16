@@ -9,7 +9,7 @@ const pool = new Pool({
     connectionString,
     ssl: {
       rejectUnauthorized: true, 
-      ca: fs.readFileSync(path.resolve('././certs/ca-certificate.crt')).toString(),
+      ca: fs.readFileSync(path.resolve('././ca-certificate.crt')).toString(),
 
 
   },
