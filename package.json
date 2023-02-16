@@ -15,9 +15,8 @@
   "scripts": {
     "devstart": "nodemon app/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app/index.js",
-    "load-cert-start": "export NODE_EXTRA_CA_CERTS=ca-certificate.crt && npm run start"
-  },
+    "start": "node app/index.js"
+    },
   "author": "Kathryn Schuler",
   "license": "ISC"
 }
