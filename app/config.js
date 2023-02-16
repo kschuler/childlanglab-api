@@ -10,7 +10,11 @@ config.express = {
 }
 
 config.database = { 
-  connectionstring: process.env.CONNECTION_STRING,
+  user: process.env.USERNAME,
+  host: process.env.HOSTNAME,
+  database: process.env.DATABASE,
+  password: process.env.PASSWORD,
+  port: process.env.PORT,
   ca: process.env.CA_CERT,
   table: process.env.POSTGRES_TABLE,
   id_colname: process.env.COLNAME_ID,
