@@ -34,4 +34,4 @@ app.listen(config.express.port, config.express.ip, function (error) {
       process.exit(10)
     } 
       console.log('express is listening on http://' + config.express.ip + ':' + config.express.port)
-  })
+  });

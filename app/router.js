@@ -32,27 +32,6 @@ function upsertData (req, res) {
     })
 }
 
-// function updateRun (req, res) {
-
-//     // transform the pcibex data into the format our database prefers
-//     const data = transformData(req.body, req.query)
-
-//     // setup the update query for pg 
-//     const query = {
-//       name: 'update-run',
-//       text: `UPDATE ${config.database.table} SET ${config.database.data_colname} = $2 WHERE ${config.database.id_colname} = $1 RETURNING *;`,
-//       values: [data[config.database.id_colname], data[config.database.data_colname]]
-//     }
-
-//     // callback function to run the query 
-//     pool.query(query, (error, result) => {
-//       if (error) { res.status(403).send(error) } 
-//       else { res.status(201).send(result.rows)}
-//     })
-// }
-
-// our two routes, guarded by our validate.js middleware 
 router.post('/v1/runs/pcibex',  requestValidationRules(), validateRequest, upsertData)
-// router.post('/update-run', requestValidationRules(), validateRequest, updateRun)
 
 module.exports = router

@@ -1,7 +1,5 @@
 const config = require('./config')
 const { Pool } = require('pg')
-const fs = require('fs')
-const path = require('path');
 
 // connect to the database 
 const pool = new Pool({
