@@ -3,3 +3,5 @@ build
 npm-debug.log
 .env
 .DS_Store
+!certs/ca-certificate.crt
+!ca-certificate.crt
