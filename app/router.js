@@ -8,6 +8,8 @@ function upsertData (req, res) {
 
     // transform the pcibex data into the format our database prefers
     const data = transformData(req.body, req.query)
+
+    console.log(process.env.NODE_EXTRA_CA_CERTS)
     
     // pull out the columns and their indexes so we can pass them to the query more easily
     const columns = Object.keys(data)
