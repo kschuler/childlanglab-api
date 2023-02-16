@@ -10,11 +10,11 @@ config.express = {
 }
 
 config.database = { 
-  user: process.env.USERNAME,
-  host: process.env.HOSTNAME,
-  database: process.env.DATABASE,
-  password: process.env.PASSWORD,
-  port: process.env.PORT,
+  user: process.env.DB_USERNAME,
+  host: process.env.DB_HOSTNAME,
+  database: process.env.DB_DATABASE,
+  password: process.env.DB_PASSWORD,
+  port: process.env.DB_PORT,
   ca: process.env.CA_CERT,
   table: process.env.POSTGRES_TABLE,
   id_colname: process.env.COLNAME_ID,
