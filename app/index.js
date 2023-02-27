@@ -8,7 +8,7 @@ const config = require('./config')
 const app = express()
 
 // PCIbex sends request as text/html; tell express to expect this
-app.use(express.json({type: 'text/html'}));
+app.use(express.json({type: 'text/html', limit: '50mb'}));
 
 app.use(cors({
   origin: config.validation.origin
