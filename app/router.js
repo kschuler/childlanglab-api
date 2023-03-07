@@ -34,6 +34,6 @@ function upsertData (req, res) {
 }
 
 router.post('/v1/runs/pcibex',  requestValidationRules(), validateRequest, upsertData)
-router.post('/v1/recordings/pcibex', getPresignedPost)
+router.post('/v1/recordings/pcibex', getPresignedPost())
 
 module.exports = router
