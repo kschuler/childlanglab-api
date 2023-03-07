@@ -3,6 +3,7 @@ const pool = require('./database')
 const router = require('express').Router()
 const { requestValidationRules, validateRequest  } = require('./validate')
 const transformData  = require('./transform')
+const getPresignedPost = require('./s3uploader')
 
 function upsertData (req, res) {
 
@@ -33,5 +34,6 @@ function upsertData (req, res) {
 }
 
 router.post('/v1/runs/pcibex',  requestValidationRules(), validateRequest, upsertData)
+router.post('/v1/recordings/pcibex', getPresignedPost)
 
 module.exports = router
