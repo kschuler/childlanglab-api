@@ -32,7 +32,7 @@ function upsertData (req, res) {
     })
 }
 
-function createJspsychRun (req, res){
+function upsertJspsychData (req, res){
 
    // pull out the columns and their indexes so we can pass them to the query more easily
    const columns = Object.keys(req.body)
@@ -64,7 +64,7 @@ function createJspsychRun (req, res){
 }
 
 router.post('/v1/runs/pcibex',  pcibexValidationRules(), validateRequest, upsertData)
-router.get('/v2/jspsych/runs/create', jspsychValidationRules(), validateRequest, createJspsychRun) 
+router.post('/v2/runs/jspsych', jspsychValidationRules(), validateRequest, upsertJspsychData) 
 
 
 module.exports = router
