@@ -3,6 +3,8 @@
 const express = require('express')
 const cors = require('cors')
 const config = require('./config')
+const bodyParser = require('body-parser')
+
 
 // Create a new instance of express
 const app = express()

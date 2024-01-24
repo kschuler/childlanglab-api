@@ -34,9 +34,10 @@ function upsertData (req, res) {
 
 function upsertJspsychData (req, res){
 
+  const data = req.body;
   //  pull out the columns and their indexes so we can pass them to the query more easily
-   const columns = Object.keys(req.body)
-   const indexes = Object.keys(req.body).map((value, index) => `$${index+1}`);
+   const columns = Object.keys(data)
+   const indexes = Object.keys(data).map((value, index) => `$${index+1}`);
    const data_col_index = columns.indexOf(config.database.data_colname)+1
 
    console.log(data_col_index)
@@ -46,7 +47,7 @@ function upsertJspsychData (req, res){
      name: 'create-run',
      text: `INSERT INTO ${config.database.table}(${columns}) VALUES(${indexes})
             ON CONFLICT (${config.database.id_colname}) DO UPDATE SET data = $${data_col_index} RETURNING *`,
-     values: Object.values(req.body)
+     values: Object.values(data)
    }
 
    // callback function to run the query 
