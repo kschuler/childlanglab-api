@@ -34,7 +34,10 @@ function upsertData (req, res) {
 
 function upsertJspsychData (req, res){
 
-  const data = req.body;
+   // stringify the data from jspsych
+   const data = req.body;
+   data.data = JSON.stringify(data.data)
+   
   //  pull out the columns and their indexes so we can pass them to the query more easily
    const columns = Object.keys(data)
    const indexes = Object.keys(data).map((value, index) => `$${index+1}`);
