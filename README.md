@@ -20,6 +20,6 @@ pcibex-to-postgres will validate incoming requests by default to ensure:
 
 
 
+### Changelog
 
-
-
+- Jan 24 2024 - I removed the s3uploader.js and references to it, since it was not functional 

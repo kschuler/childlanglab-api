@@ -1,7 +1,7 @@
 const config = require('./config')
 const { header, query, body, validationResult } = require('express-validator');
 
-function requestValidationRules () {
+function pcibexValidationRules () {
 
     return [
         header('origin') // check that request is originating from a trusted origin
@@ -28,6 +28,23 @@ function requestValidationRules () {
         ]
 }
 
+function jspsychValidationRules () {
+
+    return [
+        // header('origin') // check that request is originating from a trusted origin
+        //     .contains(config.validation.origin_jspsych)
+        //     .withMessage("Request must come from a trusted origin."),
+        body(config.validation.urlvars)
+            .notEmpty()
+            .isString()
+            .withMessage("Request body must include lab-required URL variables"),
+        body("data") // make sure we have the pcibex structure we expect;
+            .isArray()  
+            .notEmpty()
+            .withMessage("Request body must be an array"),
+        ]
+}
+
 function validateRequest (req, res, next) {
 
     // get the error report from express-validator
@@ -39,5 +56,5 @@ function validateRequest (req, res, next) {
 
 }
 
-module.exports = { requestValidationRules, validateRequest }
+module.exports = { pcibexValidationRules, jspsychValidationRules, validateRequest }
 

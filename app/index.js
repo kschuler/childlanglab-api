@@ -8,7 +8,8 @@ const config = require('./config')
 const app = express()
 
 // PCIbex sends request as text/html; tell express to expect this
-app.use(express.json({type: 'text/html', limit: '50mb'}));
+// jsPsych sends data as json; tell express to expect that too 
+app.use(express.json({type: ['text/html', 'json'], limit: '50mb'}));
 
 app.use(cors({
   origin: config.validation.origin
