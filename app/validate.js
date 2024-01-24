@@ -34,14 +34,15 @@ function jspsychValidationRules () {
         // header('origin') // check that request is originating from a trusted origin
         //     .contains(config.validation.origin_jspsych)
         //     .withMessage("Request must come from a trusted origin."),
-        body(config.validation.urlvars)
+       // body(config.validation.urlvars)
+       body("randomid")
             .notEmpty()
             .isString()
             .withMessage("Request body must include lab-required URL variables"),
         body("data") // make sure we have the pcibex structure we expect;
-            .isArray()  
+            .isString()
             .notEmpty()
-            .withMessage("Request body must be an array"),
+            .withMessage("Data json payload must be formatted as a string"),
         ]
 }
 
