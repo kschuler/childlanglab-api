@@ -34,7 +34,7 @@ function upsertData (req, res) {
 
 function upsertJspsychData (req, res){
 
-   // pull out the columns and their indexes so we can pass them to the query more easily
+  //  // pull out the columns and their indexes so we can pass them to the query more easily
    const columns = Object.keys(req.body)
    const indexes = Object.keys(req.body).map((value, index) => `$${index+1}`);
    const data_col_index = columns.indexOf(config.database.data_colname)+1
