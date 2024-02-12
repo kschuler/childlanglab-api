@@ -39,7 +39,7 @@ function jspsychValidationRules () {
             .isString()
             .withMessage("Request body must include lab-required URL variables"),
         body("data") // make sure we have the pcibex structure we expect;
-            .isArray()
+            .isString()
             .withMessage("Data json payload must be formatted as json"),
         ]
 }
