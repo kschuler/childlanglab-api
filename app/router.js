@@ -68,7 +68,7 @@ function upsertJspsychData (req, res){
 }
 
 router.post('/v1/runs/pcibex',  pcibexValidationRules(), validateRequest, upsertData)
-router.post('/v2/runs/jspsych', jspsychValidationRules(), validateRequest, upsertJspsychData) 
+router.post('/v1/runs/jspsych', jspsychValidationRules(), validateRequest, upsertJspsychData) 
 
 
 module.exports = router
