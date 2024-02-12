@@ -14,7 +14,7 @@ const app = express()
 app.use(express.json({type: ['text/html', 'json'], limit: '50mb'}));
 
 app.use(cors({
-  origin: config.validation.origin
+  origin: [config.validation.origin, config.validation.origin_jspsych]
 }));
 
 app.get('/', (req, res) => {
