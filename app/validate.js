@@ -5,7 +5,7 @@ function pcibexValidationRules () {
 
     return [
         header('origin') // check that request is originating from a trusted origin
-            .contains(config.validation.origin)
+            .isIn(config.validation.origins)
             .withMessage("Request must come from a trusted origin."),
         query(config.validation.urlvars)  // check that the query string contains required URL variables 
             .exists()
@@ -32,7 +32,7 @@ function jspsychValidationRules () {
 
     return [
         header('origin') // check that request is originating from a trusted origin
-            .contains(config.validation.origin_jspsych)
+            .isIn(config.validation.origins)
             .withMessage("Request must come from a trusted origin."),
        // body(config.validation.urlvars)
        body("randomid")

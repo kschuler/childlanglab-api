@@ -21,7 +21,6 @@ config.database = {
 }
 
 config.validation = {
-  origin: process.env.TRUSTED_ORIGIN,
-  origin_jspsych: process.env.TRUSTED_ORIGIN_JSPSYCH,
+  origins: process.env.TRUSTED_ORIGINS,
   urlvars: [config.database.id_colname, "participant","project","experiment","condition","researcher","sourcedb","location"]
 }
