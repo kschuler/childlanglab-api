@@ -21,6 +21,6 @@ config.database = {
 }
 
 config.validation = {
-  origins: process.env.TRUSTED_ORIGINS,
+  origins:  ["https://upenn.pcibex.net", "https://nyc3.digitaloceanspaces.com", "https://pennchildlanglab.github.io"],
   urlvars: [config.database.id_colname, "participant","project","experiment","condition","researcher","sourcedb","location"]
 }
