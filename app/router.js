@@ -68,38 +68,41 @@ function upsertJspsychData (req, res){
 
 }
 
-function uploadToS3 (req, res){
+function getSignedUrl(req, res){
   console.log(req.body); // check if the base64 string is sent
 
-  const {file} = req.body; 
-
-  if (!file){
-    return res.status(400).json({message: 'No file provided'})
-  }
-
-  const buffer = Buffer.from(file, 'base64'); 
+  const {fileName, fileType } = req.body; 
 
   const params = {
     Bucket: config.aws.bucketName, // Your bucket name
-    Key: `${Date.now()}.wav`, // Unique file name
-    Body: buffer, // File content
-    ContentType: 'audio/wav', // File MIME type
+    Key: fileName, // File name
+    Expires: 60*5, // URL expires in 5 minutes
+    ContentType:  fileType, 
     ACL: 'public-read', // Optional: Make file publicly readable
   };
-
-  s3.upload(params, (err, data) => {
-    if (err) {
-      console.error('Error uploading to s3:', err); 
-    } 
-    res.json({message: 'File uploaded successfully', fileUrl: data.Location}); 
+  
+  s3.getSignedUrl('putObject', params, (err, url) => {
+    if (err){
+      console.error(err); 
+      return res.status(500).json({message: 'Error generating presigned URL'}); 
+    }
+    res.json({uploadUrl: url})
   })
-};
+}
+
+//   s3.upload(params, (err, data) => {
+//     if (err) {
+//       console.error('Error uploading to s3:', err); 
+//     } 
+//     res.json({message: 'File uploaded successfully', fileUrl: data.Location}); 
+//   })
+// };
 
 router.post('/v1/runs/pcibex',  pcibexValidationRules(), validateRequest, upsertData)
 router.post('/v1/runs/jspsych', jspsychValidationRules(), validateRequest, upsertJspsychData) 
 
 // Route for File Upload
-router.post('/v1/upload', uploadToS3)
+router.post('/v1/upload', getSignedUrl)
   // try {
   //   const file = req.file;
   //   if (!file) {
