@@ -68,37 +68,51 @@ function upsertJspsychData (req, res){
 
 }
 
-// S3 Upload Function
-const uploadToS3 = async (file) => {
+function uploadToS3 (req, res){
+  console.log(req.body); // check if the base64 string is sent
+
+  const {file} = req.body; 
+
+  if (!file){
+    return res.status(400).json({message: 'No file provided'})
+  }
+
+  const buffer = Buffer.from(file, 'base64'); 
+
   const params = {
     Bucket: config.aws.bucketName, // Your bucket name
-    Key: `${Date.now()}_${file.originalname}`, // Unique file name
-    Body: file.buffer, // File content
-    ContentType: file.mimetype, // File MIME type
+    Key: `${Date.now()}.wav`, // Unique file name
+    Body: buffer, // File content
+    ContentType: 'audio/wav', // File MIME type
     ACL: 'public-read', // Optional: Make file publicly readable
   };
 
-  return s3.upload(params).promise(); // Upload and return a promise
+  s3.upload(params, (err, data) => {
+    if (err) {
+      console.error('Error uploading to s3:', err); 
+    } 
+    res.json({message: 'File uploaded successfully', fileUrl: data.Location}); 
+  })
 };
 
 router.post('/v1/runs/pcibex',  pcibexValidationRules(), validateRequest, upsertData)
 router.post('/v1/runs/jspsych', jspsychValidationRules(), validateRequest, upsertJspsychData) 
 
 // Route for File Upload
-router.post('/v1/upload', upload.single('file'), async (req, res) => {
-  try {
-    const file = req.file;
-    if (!file) {
-      return res.status(400).send({ error: 'No file provided' });
-    }
+router.post('/v1/upload', uploadToS3)
+  // try {
+  //   const file = req.file;
+  //   if (!file) {
+  //     return res.status(400).send({ error: 'No file provided' });
+  //   }
 
-    const result = await uploadToS3(file); // Upload to S3
-    res.status(200).send({ message: 'File uploaded successfully', data: result });
-  } catch (error) {
-    console.error('Error uploading file:', error);
-    res.status(500).send({ error: 'Failed to upload file' });
-  }
-});
+  //   const result = await uploadToS3(file); // Upload to S3
+  //   res.status(200).send({ message: 'File uploaded successfully', data: result });
+  // } catch (error) {
+  //   console.error('Error uploading file:', error);
+  //   res.status(500).send({ error: 'Failed to upload file' });
+  // }
+// });
 
 
 module.exports = router
