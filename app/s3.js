@@ -6,7 +6,6 @@ const config = require('./config');
 const s3 = new AWS.S3({
     forcePathStyle: false,
     region: config.aws.region,
-    bucket: 'recordings.childlanglab',
     endpoint: 'https://nyc3.digitaloceanspaces.com', 
     credentials: {
         accessKeyId: config.aws.accessKeyId,
