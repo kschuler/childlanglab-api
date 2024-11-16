@@ -61,13 +61,32 @@ function upsertJspsychData (req, res){
      else { res.status(201).send(result.rows)}
     
    })
-
-
-  // res.send({
-  //   response: "You are trying to create a run!"
-  // })
-
 }
+
+   function insertRecordings(req, res) {
+    // Extract and prepare data from the request
+    const data = req.body; // Ensure req.body contains the necessary data
+    
+    // Map columns and their values
+    const columns = Object.keys(data); // e.g., ['id', 'name', 'description', 'data']
+    const indexes = columns.map((_, index) => `$${index + 1}`); // e.g., ['$1', '$2', ...]
+  
+    // Setup the INSERT query (without ON CONFLICT)
+    const query = {
+      text: `INSERT INTO childlanglab.recordings (${columns.join(', ')}) 
+             VALUES (${indexes.join(', ')})
+             RETURNING *`,  // Optionally return the inserted row
+      values: Object.values(data),
+    };
+  
+    // Execute the query
+     // callback function to run the query 
+   pool.query(query, (error, result) => {
+    if (error) { res.status(403).send(error) } 
+    else { res.status(201).send(result.rows)}
+   
+  })
+  }
 
 // async function uploadToS3(req, res){
 //   console.log(req.body); // check if the base64 string is sent
@@ -116,8 +135,10 @@ function upsertJspsychData (req, res){
 //   })
 // };
 
+router.post('/v1/recordings', insertRecordings)
 router.post('/v1/runs/pcibex',  pcibexValidationRules(), validateRequest, upsertData)
 router.post('/v1/runs/jspsych', jspsychValidationRules(), validateRequest, upsertJspsychData) 
+
 
 // Route for File Upload
 // Upload route
