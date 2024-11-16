@@ -73,7 +73,7 @@ function upsertJspsychData (req, res){
   
     // Setup the INSERT query (without ON CONFLICT)
     const query = {
-      text: `INSERT INTO childlanglab.recordings (${columns.join(', ')}) 
+      text: `INSERT INTO childlanglabdb.recordings (${columns.join(', ')}) 
              VALUES (${indexes.join(', ')})
              RETURNING *`,  // Optionally return the inserted row
       values: Object.values(data),
