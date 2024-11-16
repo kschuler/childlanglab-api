@@ -124,6 +124,8 @@ router.post('/v1/runs/jspsych', jspsychValidationRules(), validateRequest, upser
 router.post('/v1/upload', async (req, res) => {
   try {
     const { base64Data, fileName, mimeType } = req.body;
+    console.log(req.body); 
+    console.log(s3);
 
     if (!base64Data || !fileName || !mimeType) {
       return res.status(400).json({ error: 'Missing required fields' });
