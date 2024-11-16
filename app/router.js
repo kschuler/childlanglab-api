@@ -3,6 +3,7 @@ const pool = require('./database')
 const router = require('express').Router()
 const { pcibexValidationRules, jspsychValidationRules, validateRequest  } = require('./validate')
 const transformData  = require('./transform')
+const { s3, upload } = require('./s3')
 
 function upsertData (req, res) {
 
@@ -67,8 +68,37 @@ function upsertJspsychData (req, res){
 
 }
 
+// S3 Upload Function
+const uploadToS3 = async (file) => {
+  const params = {
+    Bucket: config.aws.bucketName, // Your bucket name
+    Key: `${Date.now()}_${file.originalname}`, // Unique file name
+    Body: file.buffer, // File content
+    ContentType: file.mimetype, // File MIME type
+    ACL: 'public-read', // Optional: Make file publicly readable
+  };
+
+  return s3.upload(params).promise(); // Upload and return a promise
+};
+
 router.post('/v1/runs/pcibex',  pcibexValidationRules(), validateRequest, upsertData)
 router.post('/v1/runs/jspsych', jspsychValidationRules(), validateRequest, upsertJspsychData) 
+
+// Route for File Upload
+router.post('/v1/upload', upload.single('file'), async (req, res) => {
+  try {
+    const file = req.file;
+    if (!file) {
+      return res.status(400).send({ error: 'No file provided' });
+    }
+
+    const result = await uploadToS3(file); // Upload to S3
+    res.status(200).send({ message: 'File uploaded successfully', data: result });
+  } catch (error) {
+    console.error('Error uploading file:', error);
+    res.status(500).send({ error: 'Failed to upload file' });
+  }
+});
 
 
 module.exports = router
