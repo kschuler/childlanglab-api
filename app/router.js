@@ -121,7 +121,7 @@ router.post('/v1/runs/jspsych', jspsychValidationRules(), validateRequest, upser
 
 // Route for File Upload
 // Upload route
-router.post('/upload', async (req, res) => {
+router.post('/v1/upload', async (req, res) => {
   try {
     const { base64Data, fileName, mimeType } = req.body;
 
