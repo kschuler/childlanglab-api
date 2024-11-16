@@ -5,6 +5,7 @@ const config = require('./config');
 // AWS S3 Configuration
 const s3 = new AWS.S3({
     region: config.aws.region,
+    endpoint: 'https://nyc3.digitaloceanspaces.com', 
     accessKeyId: config.aws.accessKeyId,
     secretAccessKey: config.aws.secretAccessKey,
   });
