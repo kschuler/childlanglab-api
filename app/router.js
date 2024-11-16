@@ -144,9 +144,12 @@ router.post('/v1/upload', async (req, res) => {
     };
 
     // Upload to S3
-    const data = await s3.putObject(params).promise();
+    //const data = await s3.putObject(params).promise();
+    const command = new PutObjectCommand(params); 
 
-    return res.status(200).json({ message: 'Upload successful', url: data.Location });
+    await s3Client.send(commant); 
+
+    return res.status(200).json({ message: 'Upload successful', url });
   } catch (error) {
     console.error('Error uploading to S3:', error);
     res.status(500).json({ error: 'Failed to upload' });
