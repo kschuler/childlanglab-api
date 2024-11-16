@@ -142,7 +142,7 @@ router.post('/v1/upload', async (req, res) => {
     };
 
     // Upload to S3
-    const data = await s3.upload(params).promise();
+    const data = await s3.putObject(params).promise();
 
     return res.status(200).json({ message: 'Upload successful', url: data.Location });
   } catch (error) {
