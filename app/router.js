@@ -3,7 +3,7 @@ const pool = require('./database')
 const router = require('express').Router()
 const { pcibexValidationRules, jspsychValidationRules, validateRequest  } = require('./validate')
 const transformData  = require('./transform')
-const { s3, upload } = require('./s3')
+const { s3 } = require('./s3')
 const { Buffer } = require('buffer');
 
 function upsertData (req, res) {
