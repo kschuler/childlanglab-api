@@ -21,7 +21,7 @@ config.database = {
 }
 
 config.validation = {
-  origins:  ["https://upenn.pcibex.net", "https://nyc3.digitaloceanspaces.com", "https://pennchildlanglab.github.io"],
+  origins:  ["https://upenn.pcibex.net", "https://nyc3.digitaloceanspaces.com", "https://pennchildlanglab.github.io", "https://rjsnider.github.io/"],
   urlvars: [config.database.id_colname, "participant","expid", "versionid", "condition","researcher","sourcedb","location"]
 }
 
